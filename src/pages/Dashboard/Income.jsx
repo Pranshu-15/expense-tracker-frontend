@@ -25,13 +25,8 @@ const Income = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      console.log(
-        "Fetching income data with token:",
-        token ? "Token exists" : "No token"
-      );
 
       const url = `${BASE_URL}${API_PATHS.INCOME.GET_ALL_INCOME}`;
-      console.log("API URL:", url);
 
       const response = await fetch(url, {
         method: "GET",
@@ -41,12 +36,8 @@ const Income = () => {
         },
       });
 
-      console.log("Response status:", response.status);
-
       if (response.ok) {
         const data = await response.json();
-        console.log("Income data received:", data);
-        console.log("Data length:", data.length);
         setIncomeData(data);
       } else {
         const errorData = await response.text();

@@ -44,7 +44,7 @@ const ExpenseOverview = ({ transactions, onAddExpense, loading = false }) => {
                   chart.
                 </p>
                 <p className="text-xs mt-2">
-                  Debug: Transactions count: {transactions?.length || 0}
+                   Transactions count: {transactions?.length || 0}
                 </p>
                 <p className="text-xs">Chart data count: {chartData.length}</p>
               </div>

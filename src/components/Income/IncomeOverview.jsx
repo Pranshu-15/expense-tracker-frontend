@@ -8,7 +8,7 @@ const IncomeOverview = ({ transactions, onAddIncome, loading = false }) => {
 
   useEffect(() => {
     const result = prepareIncomeBarChartData(transactions);
-    console.log("IncomeOverview - chart data prepared:", result);
+    // console.log("IncomeOverview - chart data prepared:", result);
     setChartData(result);
     return () => {};
   }, [transactions]);
@@ -44,7 +44,7 @@ const IncomeOverview = ({ transactions, onAddIncome, loading = false }) => {
                   chart.
                 </p>
                 <p className="text-xs mt-2">
-                  Debug: Transactions count: {transactions?.length || 0}
+                   Transactions count: {transactions?.length || 0}
                 </p>
                 <p className="text-xs">Chart data count: {chartData.length}</p>
               </div>

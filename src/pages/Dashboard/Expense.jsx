@@ -25,13 +25,8 @@ const Expense = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      console.log(
-        "Fetching expense data with token:",
-        token ? "Token exists" : "No token"
-      );
 
       const url = `${BASE_URL}${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`;
-      console.log("API URL:", url);
 
       const response = await fetch(url, {
         method: "GET",
@@ -41,12 +36,8 @@ const Expense = () => {
         },
       });
 
-      console.log("Response status:", response.status);
-
       if (response.ok) {
         const data = await response.json();
-        console.log("Expense data received:", data);
-        console.log("Data length:", data.length);
         setExpenseData(data);
       } else {
         const errorData = await response.text();

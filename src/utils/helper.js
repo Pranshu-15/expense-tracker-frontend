@@ -48,17 +48,12 @@ export const prepareExpenseBarChartData = (data = []) => {
 };
 
 export const prepareIncomeBarChartData = (data = []) => {
-  console.log('prepareIncomeBarChartData input:', data);
-  console.log('Data type:', typeof data);
-  console.log('Is array:', Array.isArray(data));
   
   if (!data || data.length === 0) {
-    console.log('No data or empty array returned');
     return [];
   }
   
   const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
-  console.log('Sorted data:', sortedData);
 
   const chartData = sortedData.map((item) => ({
     month: moment(item?.date).format('Do MMM'),
@@ -66,6 +61,6 @@ export const prepareIncomeBarChartData = (data = []) => {
     source: item?.source,
   }));
 
-  console.log('Final chart data:', chartData);
+ 
   return chartData;
 };

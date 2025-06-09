@@ -17,7 +17,6 @@ const RecentIncomeWithChart = ({ data, totalIncome }) => {
     prepareChartData();
     return () => {};
   }, [data]);
-  console.log(chartData);
 
   return (
     <div className="card">
