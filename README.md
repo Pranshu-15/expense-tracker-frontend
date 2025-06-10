@@ -1,6 +1,6 @@
 # 💰 Expense Tracker Frontend ✨
 ## 🌟 Features That Make You Go WOW!
-
+<div align="lefy">
 | Feature | Description | Emoji |
 |---------|-------------|-------|
 | **💸 Expense Management** | Add, edit, and delete expenses with ease | ✏️➕🗑️ |
@@ -10,12 +10,12 @@
 | **📱 Responsive Design** | Mobile-friendly interface that works on all devices | 💻📱⌚ |
 | **⚡ Real-time Updates** | Instant updates to expense data | 🔄💨 |
 | **🔐 User Authentication** | Secure login and registration system | 🛡️🔑 |
-
+</div>
 ---
 
 ## 🛠️ Tech Stack (The Cool Stuff!)
 
-<div align="center">
+<div align="left">
 
 | Technology | Purpose | Status |
 |------------|---------|--------|
@@ -32,6 +32,7 @@
 
 ---
 
+<div align="left">
 ## 📋 Prerequisites (Let's Get Ready! 🎯)
 
 Before diving into this awesome project, make sure you have:
@@ -41,9 +42,10 @@ Before diving into this awesome project, make sure you have:
 - 🔧 **Git** 
 
 > 💡 **Pro Tip**: Use `node --version` and `npm --version` to check your current versions!
-
+</div>
 ---
 
+<div align="left">
 ## 🚀 Installation (3... 2... 1... Blast Off!)
 
 ### 1️⃣ **Clone the Repository** 📥
@@ -75,8 +77,9 @@ yarn dev
 
 🎉 **Boom!** Your app is now running at `http://localhost:5173`
 
+</div>
 ---
-
+<div align="left">
 ## 🎬 Available Scripts (Your Command Center!)
 
 | Script | What It Does | Emoji |
@@ -86,9 +89,9 @@ yarn dev
 | `npm run preview` | 👀 Serves production build locally | 🖥️ |
 | `npm run lint` | 🔍 Checks code quality issues | 🧹 |
 | `npm run lint:fix` | 🔧 Auto-fixes ESLint issues | ✨ |
-
+</div>
 ---
-
+<div align="left">
 ## 📁 Project Structure (Organized Like a Boss! 🗂️)
 
 ```
@@ -121,7 +124,8 @@ expense-tracker-frontend/
 ```
 
 ---
-
+</div>
+<div align="left">
 ## 🎯 Key Components (The Star Players! ⭐)
 
 ### 📊 Dashboard
@@ -141,9 +145,9 @@ expense-tracker-frontend/
 - 🥧 Category-wise expense distribution  
 - 📊 Spending trends over time
 - ⚖️ Budget vs actual comparisons
-
+</div>
 ---
-
+<div align="left">
 ## 🔌 API Integration (Backend Connection! 🌐)
 
 This frontend connects to a backend API. Make sure your backend server is running! 🏃‍♂️
@@ -284,5 +288,5 @@ Got questions? We've got answers!
 1. 🔍 Check existing issues on GitHub
 2. 🆕 Create a new issue with detailed information  
 3. 📧 Contact the maintainer
-
+</div>
 ---
