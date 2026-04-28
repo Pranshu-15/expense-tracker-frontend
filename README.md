@@ -10,6 +10,9 @@
 | **📱 Responsive Design** | Mobile-friendly interface that works on all devices | 💻📱⌚ |
 | **⚡ Real-time Updates** | Instant updates to expense data | 🔄💨 |
 | **🔐 User Authentication** | Secure login and registration system | 🛡️🔑 |
+| **🤖 AI Spending Insights** | Smart natural language summaries of your spending via Gemini AI | 🧠✨ |
+| **🔑 Secure Password Recovery** | Security question-based forgot password flow | 🔐❓ |
+| **🖼️ Persistent Profile Photos** | Base64 database image storage for ephemeral cloud hosting | 📸💾 |
 </div>
 ---
 
@@ -27,6 +30,7 @@
 | 📊 **Chart.js / Recharts** | Charts | ✅ Interactive |
 | 📅 **Date-fns / Moment.js** | Date Handling | ✅ Flexible |
 | 🧭 **React Router DOM** | Routing | ✅ Smooth |
+| 🧠 **Google Gemini** | AI Summaries | ✅ Integrated |
 
 </div>
 
