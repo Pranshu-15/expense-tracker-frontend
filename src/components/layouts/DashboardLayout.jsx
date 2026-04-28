@@ -6,41 +6,50 @@ import SideMenu from "./SideMenu";
 const DashboardLayout = ({ children, activeMenu }) => {
   const { user, isLoading } = useContext(UserContext);
 
-  // Show loading state while checking authentication
   if (isLoading) {
     return (
-      <div className="">
+      <div
+        className="min-h-screen flex flex-col"
+        style={{ background: "var(--bg-base)" }}
+      >
         <Navbar activeMenu={activeMenu} />
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
-            <p className="mt-2 text-gray-600">Loading...</p>
+        <div className="flex items-center justify-center flex-1">
+          <div className="flex flex-col items-center gap-4">
+            <div
+              className="w-10 h-10 rounded-full border-2 border-t-transparent animate-spin"
+              style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }}
+            />
+            <p className="text-sm" style={{ color: "var(--text-3)" }}>
+              Loading…
+            </p>
           </div>
         </div>
       </div>
     );
   }
 
-  // If not loading and no user, don't render the dashboard content
   if (!user) {
     return (
-      <div className="">
+      <div
+        className="min-h-screen flex flex-col"
+        style={{ background: "var(--bg-base)" }}
+      >
         <Navbar activeMenu={activeMenu} />
-        <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-gray-600">Please log in to access this page.</p>
+        <div className="flex items-center justify-center flex-1">
+          <p style={{ color: "var(--text-3)" }}>Please log in to continue.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="">
+    <div className="min-h-screen flex flex-col" style={{ background: "var(--bg-base)" }}>
       <Navbar activeMenu={activeMenu} />
-      <div className="flex">
+      <div className="flex flex-1">
         <div className="max-[1080px]:hidden">
           <SideMenu activeMenu={activeMenu} />
         </div>
-        <div className="grow mx-5">{children}</div>
+        <main className="flex-1 p-5 overflow-x-hidden">{children}</main>
       </div>
     </div>
   );

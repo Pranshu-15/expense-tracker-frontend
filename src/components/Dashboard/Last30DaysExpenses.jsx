@@ -6,16 +6,17 @@ const Last30DaysExpenses = ({ data }) => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    const result = prepareExpenseBarChartData(data);
-    setChartData(result);
-    return () => {};
+    setChartData(prepareExpenseBarChartData(data));
   }, [data]);
 
   return (
-    <div className="card col-span-1">
-      <div className="flex items-center justify-between">
-        <h5 className="text-lg">Last 30 Days Expenses</h5>
-      </div>
+    <div className="card" style={{ borderTop: "3px solid var(--orange)" }}>
+      <h5 className="text-base font-semibold" style={{ color: "var(--text-1)" }}>
+        Last 30 Days Expenses
+      </h5>
+      <p className="text-xs mt-0.5" style={{ color: "var(--text-3)" }}>
+        Spending by category
+      </p>
       <CustomBarChart data={chartData} />
     </div>
   );

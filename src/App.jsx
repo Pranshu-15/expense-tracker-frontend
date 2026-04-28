@@ -7,47 +7,51 @@ import {
 } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Home from "./pages/Dashboard/Home";
 import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
+import NotFound from "./pages/NotFound";
 import UserProvider from "./context/UserContext";
-import { ToastContainer } from "react-toastify";
+import ThemeProvider from "./context/ThemeContext";
 import { Toaster } from "react-hot-toast";
+
 const App = () => {
   return (
-    <>
+    <ThemeProvider>
       <UserProvider>
-        <div>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Root />} />
-              <Route path="/login" excat element={<Login />} />
-              <Route path="/signUp" excat element={<SignUp />} />
-              <Route path="/dashboard" excat element={<Home />} />
-              <Route path="/income" excat element={<Income />} />
-              <Route path="/expense" excat element={<Expense />} />
-            </Routes>
-          </Router>
-        </div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Root />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/income" element={<Income />} />
+            <Route path="/expense" element={<Expense />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
 
         <Toaster
           toastOptions={{
-            className: "",
-            style: { fontSize: "12px" },
+            style: {
+              fontSize: "12px",
+              background: "var(--bg-card)",
+              color: "var(--text-1)",
+              border: "1px solid var(--border)",
+            },
           }}
         />
       </UserProvider>
-    </>
+    </ThemeProvider>
   );
 };
 
 export default App;
 
 const Root = () => {
-  // Check is token exists in localStorage
   const isAuthenticated = !!localStorage.getItem("token");
-
-  // Redirect to dashboard if authenticated, otherwise to login
   return isAuthenticated ? (
     <Navigate to="/dashboard" />
   ) : (

@@ -1,69 +1,69 @@
 import React, { useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
+
 const ProfilePhotoSelector = ({ image, setImage }) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
-      // Update the image state
       setImage(file);
-
-      //Generate the preview URl from the file
-      const preview = URL.createObjectURL(file);
-      setPreviewUrl(preview);
+      setPreviewUrl(URL.createObjectURL(file));
     }
   };
 
-  const handleRemoveImage = () => {
+  const handleRemove = () => {
     setImage(null);
     setPreviewUrl(null);
   };
 
-  const onChooseFile = () => {
-    inputRef.current.click();
-  };
   return (
-    <>
-      <div className="flex justify-center mb-6">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          ref={inputRef}
-          className="hidden"
-        />
+    <div className="flex justify-center mb-4">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        ref={inputRef}
+        className="hidden"
+      />
 
-        {!image ? (
-          <div className="w-20 h-20 flex items-center justify-center bg-purple-100 rounded-full relative">
-            <LuUser className="text-4xl text-[#875cf5]" />
-            <button
-              type="button"
-              className="w-8 h-8 flex items-center justify-center bg-[#875cf5] text-white rounded-full absolute -bottom-1 -right-1"
-              onClick={onChooseFile}
-            >
-              <LuUpload />
-            </button>
+      {!image ? (
+        <div className="relative w-20 h-20">
+          <div
+            className="w-20 h-20 rounded-full flex items-center justify-center"
+            style={{ background: "var(--accent-dim)" }}
+          >
+            <LuUser size={32} style={{ color: "var(--accent)" }} />
           </div>
-        ) : (
-          <div className="relative ">
-            <img
-              src={previewUrl}
-              alt="profile photo"
-              className="w-20 h-20 rounded-full object-cover"
-            />
-            <button
-              type="button"
-              className="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full absolute -bottom-1 -right-1"
-              onClick={handleRemoveImage}
-            >
-              <LuTrash />
-            </button>
-          </div>
-        )}
-      </div>
-    </>
+          <button
+            type="button"
+            onClick={() => inputRef.current.click()}
+            className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
+            style={{ background: "var(--accent)" }}
+          >
+            <LuUpload size={14} />
+          </button>
+        </div>
+      ) : (
+        <div className="relative w-20 h-20">
+          <img
+            src={previewUrl}
+            alt="Profile"
+            className="w-20 h-20 rounded-full object-cover"
+            style={{ border: "2px solid var(--border-strong)" }}
+          />
+          <button
+            type="button"
+            onClick={handleRemove}
+            className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
+            style={{ background: "var(--red)" }}
+          >
+            <LuTrash size={14} />
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

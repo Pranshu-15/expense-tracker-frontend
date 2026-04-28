@@ -1,68 +1,77 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { X } from "lucide-react";
+import { gsap } from "gsap";
 
 const Modal = ({ children, isOpen, onClose, title }) => {
-  // Close modal on Escape key press
+  const panelRef = useRef(null);
+
   useEffect(() => {
-    const handleEscapeKey = (event) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-
+    const handleEsc = (e) => { if (e.key === "Escape") onClose(); };
     if (isOpen) {
-      document.addEventListener("keydown", handleEscapeKey);
-      // Prevent body scroll when modal is open
+      document.addEventListener("keydown", handleEsc);
       document.body.style.overflow = "hidden";
+      if (panelRef.current) {
+        gsap.fromTo(
+          panelRef.current,
+          { y: 32, opacity: 0, scale: 0.96 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }
+        );
+      }
     }
-
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
-  // Don't render if modal is not open
   if (!isOpen) return null;
 
-  // Handle backdrop click to close modal
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "var(--bg-modal)" }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
       <div
-        className="fixed inset-0 bg-black/80 bg-opacity-50 transition-opacity duration-200"
-        onClick={handleBackdropClick}
+        ref={panelRef}
+        className="relative w-full max-w-md rounded-2xl shadow-2xl"
+        style={{
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-strong)",
+          boxShadow: "var(--shadow-lg)",
+        }}
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal container */}
-        <div className="flex min-h-full items-center justify-center p-4">
-          {/* Modal content */}
-          <div
-            className="relative bg-white rounded-lg shadow-xl max-w-md w-full transform transition-all duration-200 scale-100"
-            onClick={(e) => e.stopPropagation()}
+        {/* Header */}
+        <div
+          className="flex items-center justify-between px-5 py-4"
+          style={{ borderBottom: "1px solid var(--border)" }}
+        >
+          <h3
+            className="text-base font-semibold"
+            style={{ color: "var(--text-1)" }}
           >
-            {/* Modal header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-              <button
-                type="button"
-                className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2 transition-colors duration-200"
-                onClick={onClose}
-                aria-label="Close modal"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Modal body */}
-            <div className="p-4">{children}</div>
-          </div>
+            {title}
+          </h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200"
+            style={{ color: "var(--text-3)" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--accent-dim)";
+              e.currentTarget.style.color = "var(--accent)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "var(--text-3)";
+            }}
+          >
+            <X size={18} />
+          </button>
         </div>
+
+        {/* Body */}
+        <div className="px-5 py-4">{children}</div>
       </div>
     </div>
   );

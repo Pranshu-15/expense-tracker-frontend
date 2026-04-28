@@ -1,58 +1,62 @@
 import React, { useState, useEffect } from "react";
-import { LuPlus } from "react-icons/lu";
 import { prepareExpenseBarChartData } from "../../utils/helper";
 import CustomBarChart from "../Charts/CustomBarChart";
 
-const ExpenseOverview = ({ transactions, onAddExpense, loading = false }) => {
+const ExpenseOverview = ({ transactions, loading = false }) => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    const result = prepareExpenseBarChartData(transactions);
-    console.log("ExpenseOverview - chart data prepared:", result);
-    setChartData(result);
-    return () => {};
+    setChartData(prepareExpenseBarChartData(transactions));
   }, [transactions]);
 
-  return (
-    <>
-      <div className="card">
-        <div className="flex items-center justify-between">
-          <div className="">
-            <h5 className="text-lg">Expense Overview</h5>
-            <p className="text-xs text-gray-400 mt-0.5">
-              Track your spending over time and analyze your expenses
-            </p>
-          </div>
-          <button className="add-btn" onClick={onAddExpense}>
-            <LuPlus className="text-lg" />
-            Add Expense
-          </button>
-        </div>
+  const totalExpense = transactions?.reduce((s, t) => s + t.amount, 0) || 0;
 
-        <div className="mt-10">
-          {loading ? (
-            <div className="flex items-center justify-center h-[300px]">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            </div>
-          ) : chartData.length > 0 ? (
-            <CustomBarChart data={chartData} />
-          ) : (
-            <div className="flex items-center justify-center h-[300px] text-gray-500">
-              <div className="text-center">
-                <p>
-                  No expense data available. Add some expense entries to see the
-                  chart.
-                </p>
-                <p className="text-xs mt-2">
-                   Transactions count: {transactions?.length || 0}
-                </p>
-                <p className="text-xs">Chart data count: {chartData.length}</p>
-              </div>
-            </div>
-          )}
+  return (
+    <div className="card h-full" style={{ borderTop: "3px solid var(--red)" }}>
+      {/* Header */}
+      <div className="flex items-start justify-between mb-2">
+        <div>
+          <h5 className="text-base font-semibold" style={{ color: "var(--text-1)" }}>
+            Expense Overview
+          </h5>
+          <p className="text-xs mt-0.5" style={{ color: "var(--text-3)" }}>
+            Spending across all categories
+          </p>
+        </div>
+        <div
+          className="px-3 py-1 rounded-xl text-xs font-semibold"
+          style={{ background: "var(--red-dim)", color: "var(--red)" }}
+        >
+          ₹{totalExpense.toLocaleString("en-IN")} total
         </div>
       </div>
-    </>
+
+      {/* Chart */}
+      <div className="mt-4">
+        {loading ? (
+          <div className="flex items-center justify-center h-[280px]">
+            <div
+              className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin"
+              style={{ borderColor: "var(--red)", borderTopColor: "transparent" }}
+            />
+          </div>
+        ) : chartData.length > 0 ? (
+          <CustomBarChart data={chartData} color="#e53e6a" />
+        ) : (
+          <div className="flex flex-col items-center justify-center h-[280px] gap-3">
+            <div
+              className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
+              style={{ background: "var(--red-dim)" }}
+            >
+              💸
+            </div>
+            <p className="text-sm text-center" style={{ color: "var(--text-3)" }}>
+              No expense data yet.<br />Add some entries to see the chart.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

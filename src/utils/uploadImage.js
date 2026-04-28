@@ -12,9 +12,8 @@ const uploadImage = async (imageFile) => {
       API_PATHS.IMAGE.UPLOAD_IMAGE,
       formData,
       {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Set header for file upload
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 30000,
       }
     );
     return response.data; // Return response data
